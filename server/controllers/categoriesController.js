@@ -1,40 +1,40 @@
-const UserServ = require("../services/userServ");
+const CategoriesServ = require("../services/CategoriesServ");
 const express = require("express");
 const router = express.Router();
 const { createResponse } = require("../utils/createResponse");
 
-// GET all users
+// GET all categories
 router.get("/", async (req, res) => {
   try {
-    const result = await UserServ.getAllUsers();
+    const result = await CategoriesServ.getAllCategories();
     const status = result.success ? 200 : 400;
     return res.status(status).json(result);
   } catch (error) {
-    console.error("GET users error:", error);
+    console.error("GET categories error:", error);
     return res
       .status(500)
       .json(createResponse(false, null, "Internal server error"));
   }
 });
 
-// POST new user
+// POST new category
 router.post("/", async (req, res) => {
   try {
-    const result = await UserServ.addUser(req.body);
+    const result = await CategoriesServ.addCategory(req.body);
     const status = result.success ? 201 : 400;
     return res.status(status).json(result);
   } catch (error) {
-    console.error("POST user error:", error);
+    console.error("POST category error:", error);
     return res
       .status(500)
       .json(createResponse(false, null, "Internal server error"));
   }
 });
 
-// PUT update user
+// PUT update category
 router.put("/:id", async (req, res) => {
   try {
-    const result = await UserServ.updateUser(req.params.id, req.body);
+    const result = await CategoriesServ.updateCategory(req.params.id, req.body);
 
     const status = result.success
       ? 200
@@ -43,17 +43,17 @@ router.put("/:id", async (req, res) => {
       : 400;
     return res.status(status).json(result);
   } catch (error) {
-    console.error("PUT user error:", error);
+    console.error("PUT category error:", error);
     return res
       .status(500)
       .json(createResponse(false, null, "Internal server error"));
   }
 });
 
-// DELETE user
+// DELETE category
 router.delete("/:id", async (req, res) => {
   try {
-    const result = await UserServ.deleteUser(req.params.id);
+    const result = await CategoriesServ.deleteCategory(req.params.id);
 
     const status = result.success
       ? 200
@@ -62,7 +62,7 @@ router.delete("/:id", async (req, res) => {
       : 400;
     return res.status(status).json(result);
   } catch (error) {
-    console.error("DELETE user error:", error);
+    console.error("DELETE category error:", error);
     return res
       .status(500)
       .json(createResponse(false, null, "Internal server error"));
