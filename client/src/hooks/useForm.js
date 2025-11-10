@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import validateData from "./validations";
 
-const useForm = (model) => {
+const useForm = (model, validationSchema) => {
   const [values, setValues] = React.useState(model);
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
+  const [submitAttempted, setSubmitAttempted] = React.useState(false);
 
   useEffect(() => {
-    setErrors(validateData(values, "registrationSchema"));
+    setErrors(validateData(values, validationSchema));
   }, [values]);
 
   const handleChange = (e) => {
@@ -27,9 +28,19 @@ const useForm = (model) => {
     setValues(model);
     setTouched({});
     setErrors({});
+    setSubmitAttempted(false);
   };
 
-  return { values, errors, touched, handleChange, handleBlur, resetForm };
+  return {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    resetForm,
+    submitAttempted,
+    setSubmitAttempted,
+  };
 };
 
 export default useForm;
