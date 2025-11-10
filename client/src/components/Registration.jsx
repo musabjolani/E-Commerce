@@ -26,7 +26,7 @@ const Registration = () => {
   };
 
   const { values, errors, touched, handleChange, handleBlur, resetForm } =
-    useForm(initialValues);
+    useForm(initialValues, "registrationSchema");
 
   const submitHandler = async (e) => {
     e.preventDefault();

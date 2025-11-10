@@ -13,6 +13,9 @@ const schemas = {
       "Allow Others to See My Orders"
     ),
   }),
+  categoriesSchema: Joi.object({
+    name: Joi.string().min(1).max(50).required().label("Category Name"),
+  }),
 };
 
 const validateData = (data, schema) => {
